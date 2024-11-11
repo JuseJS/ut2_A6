@@ -25,7 +25,7 @@ Primero debemos agregar las dependencias necesarias al proyecto, para ellos debe
 │   └── build.gradle.kts
 └── settings.gradle
 ```
-En libs.version.kts debemos agregar las versiones de los paquetes necesarios y nombrar las liberias.
+En `libs.versions.toml` debemos agregar las versiones de los paquetes necesarios y nombrar las librerías. Luego, añadimos las dependencias en `build.gradle.kts`.
 
 ```kotlin
 // libs.versions.toml
@@ -40,4 +40,14 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+
+// build.gradle.kts
+dependencies {
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+}
+
 ```
