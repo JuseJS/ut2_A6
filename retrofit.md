@@ -25,12 +25,19 @@ Primero debemos agregar las dependencias necesarias al proyecto, para ellos debe
 │   └── build.gradle.kts
 └── settings.gradle
 ```
-En libs.version.kts
+En libs.version.kts debemos agregar las versiones de los paquetes necesarios y nombrar las liberias.
 
 ```kotlin
-// Example of a Retrofit interface in Kotlin
-interface ApiService {
-    @GET("users/{user}/repos")
-    fun listRepos(@Path("user") user: String): Call<List<Repo>>
-}
+// libs.versions.toml
+[versions]
+activity-compose = "1.7.2"
+lifecycle = "2.6.2"
+retrofit = "2.9.0"
+gson = "2.10.1"
+
+[libraries]
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 ```
