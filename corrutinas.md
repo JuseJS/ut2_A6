@@ -23,6 +23,19 @@ Las corrutinas en Kotlin simplifican la programación asíncrona y permiten escr
     retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
     retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson" }
     retrofit-coroutines-adapter = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "retrofit-coroutines-adapter" }
+
+
+    // build.gradle.kts
+    dependencies {
+        implementation libs.kotlin-stdlib
+        implementation libs.coroutines-core
+        implementation libs.coroutines-android
+        implementation libs.lifecycle-runtime-ktx
+        implementation libs.retrofit
+        implementation libs.retrofit-gson
+        implementation libs.retrofit-coroutines-adapter
+    }
+
     ```
 
 ## Uso Básico
@@ -33,11 +46,13 @@ Para lanzar una corrutina, se utiliza el constructor `launch` dentro de un `Coro
 
 ```kotlin
 import kotlinx.coroutines.*
+**import androidx.lifecycle.lifecycleScope**
 
 fun main() {
-    GlobalScope.launch {
+    ~~GlobalScope.launch {~~
+    **runBlocking {**
         // Código de la corrutina
-    }
+    **}**
 }
 ```
 
@@ -45,6 +60,9 @@ fun main() {
 
 ```kotlin
 import kotlinx.coroutines.*
+import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
 
@@ -89,7 +107,7 @@ Para usar corrutinas con Retrofit, se debe definir la interfaz del servicio con 
 ```kotlin
 interface ApiService {
     @GET("endpoint")
-    suspend fun getData(): Response<Data>
+    suspend fun getData(): **Data**
 }
 ```
 
